@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+    tools {
+        maven 'maven'
+        jdk 'jdk'
+    }
+    stages {
+        stage('git') {
+            steps {
+                echo 'Hello World'
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '54825138-fbc2-4ddc-8321-418f5313fe9a', url: 'https://github.com/dilip16311/mavenrepo.git']]])
+            }
+        }
+        stage('build'){
+            steps{
+                sh 'mvn clean package'
+            }
+        }
+    }//stages ends
+ post {
+       always {
+          junit(
+        allowEmptyResults: true,
+        testResults: '*/test-reports/.xml'
+      )
+      }
+   }
+}//pipelines ends
+
