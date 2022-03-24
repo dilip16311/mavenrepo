@@ -24,9 +24,9 @@ pipeline{
         stage('push image to docker'){
             steps{
                 script{
-                withCredentials([string(credentialsId: 'dilipkumar321', variable: 'dockerhubpwd')]) {
+                withCredentials([string(credentialsId: 'dilipkumar', variable: 'dockerhubpwd')]) {
                     sh "docker login -u dilipkumar321 -p ${dockerhubpwd}"
-                }
+}
                     sh "docker push dilipkumar321/tomcatserver-1.${build_number:latest}"
                 }
             }
