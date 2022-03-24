@@ -21,7 +21,7 @@ pipeline{
                  sh "docker run -dit --name $containername -p 8000:8080 dilipkumar321/tomcatserver-1.${build_number}:latest"
                 }
             }
-        }//
+        }
         stage('push docker image'){
             steps{
                 script{
