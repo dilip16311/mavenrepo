@@ -18,6 +18,7 @@ pipeline{
             steps{
                 script{
                     sh "docker build . -t dilipkumar321/tomcatserver-1.${build_number}:latest"
+                    sh "docker run -dit --name $containername -p 8000:8080 dilipkumar321/tomcatserver-1.${build_number}:latest"
                 }
             }
         }
@@ -27,7 +28,7 @@ pipeline{
                     withCredentials([string(credentialsId: 'dilipkumar', variable: 'dockerhubpwd')]) {
                     sh "docker login -u dilipkumar321 -p ${dockerhubpwd}"
 }
-                    sh "docker push dilipkumar321/tomcat-1.${build_number}:latest"
+                    sh "docker push dilipkumar321/tomcatserver-1.${build_number}:latest"
                 }
             }
         }
