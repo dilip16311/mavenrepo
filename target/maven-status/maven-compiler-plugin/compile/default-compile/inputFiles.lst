@@ -1,7 +1,7 @@
-/var/lib/jenkins/workspace/jenkins-pipeline/src/com/srk/servlet/RegistrationController.java
-/var/lib/jenkins/workspace/jenkins-pipeline/src/vo/Student.java
-/var/lib/jenkins/workspace/jenkins-pipeline/src/com/srk/servlet/SaveEditedStudent.java
-/var/lib/jenkins/workspace/jenkins-pipeline/src/com/srk/servlet/ViewStudents.java
-/var/lib/jenkins/workspace/jenkins-pipeline/src/com/srk/dao/StudentDAO.java
-/var/lib/jenkins/workspace/jenkins-pipeline/src/com/srk/servlet/DeleteStudent.java
-/var/lib/jenkins/workspace/jenkins-pipeline/src/com/srk/servlet/EditStudent.java
+/var/lib/jenkins/workspace/test/src/com/srk/servlet/EditStudent.java
+/var/lib/jenkins/workspace/test/src/com/srk/servlet/DeleteStudent.java
+/var/lib/jenkins/workspace/test/src/com/srk/servlet/SaveEditedStudent.java
+/var/lib/jenkins/workspace/test/src/com/srk/servlet/RegistrationController.java
+/var/lib/jenkins/workspace/test/src/com/srk/servlet/ViewStudents.java
+/var/lib/jenkins/workspace/test/src/vo/Student.java
+/var/lib/jenkins/workspace/test/src/com/srk/dao/StudentDAO.java
