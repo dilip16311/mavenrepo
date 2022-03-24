@@ -1,29 +1,31 @@
-pipeline {
+pipeline{
     agent any
-    tools {
-        maven 'maven'
-        jdk 'jdk'
+    tools{
+        maven "maven"
     }
-    stages {
-        stage('git') {
-            steps {
-                echo 'Hello World'
+    stages{
+        stage('git'){
+            steps{
                 checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: '54825138-fbc2-4ddc-8321-418f5313fe9a', url: 'https://github.com/dilip16311/mavenrepo.git']]])
             }
         }
         stage('build'){
             steps{
-                sh 'mvn clean package'
+                sh "mvn clean package"
+            }
+        }
+        stage('build docker image'){
+            steps{
+                sh "docker build . -t dilipkumar321/tomcatserver-1.$build_number:latest"
+            }
+        }
+        stage('push image to docker'){
+            steps{
+                withCredentials([string(credentialsId: 'dilipkumar321', variable: 'dockerhubpwd')]) {
+                sh "docker login -u dilipkumar321 -p $dockerhubpwd"
+                sh "docker push dilipkumar321/tomcatserver-1.$build_number:latest"
+                }
             }
         }
     }//stages ends
- post {
-       always {
-          junit(
-        allowEmptyResults: true,
-        testResults: '*/test-reports/.xml'
-      )
-      }
-   }
-}//pipelines ends
-
+}//pipeline ends
