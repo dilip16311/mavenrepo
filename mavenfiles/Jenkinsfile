@@ -21,13 +21,13 @@ pipeline{
                 }
             }
         }
-        stage('push image to docker'){
+        stage('push docker image'){
             steps{
                 script{
-                withCredentials([string(credentialsId: 'dilipkumar', variable: 'dockerhubpwd')]) {
+                    withCredentials([string(credentialsId: 'dilipkumar', variable: 'dockerhubpwd')]) {
                     sh "docker login -u dilipkumar321 -p ${dockerhubpwd}"
 }
-                    sh "docker push dilipkumar321/tomcatserver-1.${build_number:latest}"
+                    sh "docker push dilipkumar321/tomcat-1.${build_number}:latest"
                 }
             }
         }
