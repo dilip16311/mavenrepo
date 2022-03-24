@@ -16,7 +16,7 @@ pipeline{
         }
         stage('build docker image'){
             steps{
-                srcipt{
+                script{
                     sh "docker build . -t dilipkumar321/tomcatserver-1.${build_number}:latest"
                     sh "docker run -dit --name $containername -p 8000:8080 dilipkumar321/tomcatserver-1.${build_number}:latest"
                 }
