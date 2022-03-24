@@ -17,7 +17,7 @@ pipeline{
         stage('build docker image'){
             steps{
                 script{
-                sh "docker build . -t dilipkumar321/tomcatserver-1.$build_number:latest"
+                    sh "docker build . -t dilipkumar321/tomcatserver-1.${build_number}:latest"
                 }
             }
         }
@@ -25,9 +25,9 @@ pipeline{
             steps{
                 script{
                 withCredentials([string(credentialsId: 'dilipkumar321', variable: 'dockerhubpwd')]) {
-                sh "docker login -u dilipkumar321 -p $dockerhubpwd"
+                    sh "docker login -u dilipkumar321 -p ${dockerhubpwd}"
                 }
-                    sh "docker push dilipkumar321/tomcatserver-1.$build_number:latest"
+                    sh "docker push dilipkumar321/tomcatserver-1.${build_number:latest}"
                 }
             }
         }
