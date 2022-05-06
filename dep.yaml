@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: nodejs-app
-        image: "dilipkumar321/tomcatserver-1.1"
+        image: "dilipkumar321/tomcat-1.13:latest"
         ports:
           - containerPort: 8080
 ---
