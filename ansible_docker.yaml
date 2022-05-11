@@ -1,7 +1,6 @@
 ---
 - hosts: dev
-  become: true
-  gather_facts: no
+  become: yes
   tasks:
     - name: install docker
       yum:
@@ -12,10 +11,22 @@
         name: docker
         state: started
         enabled: yes
+    - name: check ec2-user can run docker commands
+      block:
+      - name: run docker commands by ec2-user
+        command: "docker ps"
+      rescue:
+      - name: add ec2-user to docker group
+        command: "usermod -aG docker ec2-user"
+      - name: give full permission to docker.sock
+        command: "find / -name docker.sock -exec chmod {} \;"
+      always:
+      - name: print docker sock file with permission
+        command: "find / -name docker.sock -exec ls -l {} \;"
     - name: start the container
       docker_container:
         name: tomcat
-        image: "dilipkumar321/tomcat:{{DOCKER_TAG}}"
+        image: dilipkumar321/tomcat:${DOCKER_TAG}
         state: started
         published_ports:
           - 0.0.0.0:8085:8080
