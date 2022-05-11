@@ -19,14 +19,14 @@
       - name: add ec2-user to docker group
         command: "usermod -aG docker ec2-user"
       - name: give full permission to docker.sock
-        command: "find / -name docker.sock -exec chmod {} \;"
+        command: "find / -name docker.sock -exec chmod 777 {} \;"
       always:
       - name: print docker sock file with permission
         command: "find / -name docker.sock -exec ls -l {} \;"
     - name: start the container
       docker_container:
         name: tomcat
-        image: dilipkumar321/tomcat:${DOCKER_TAG}
+        image: "dilipkumar321/tomcat:{{DOCKER_TAG}}"
         state: started
         published_ports:
           - 0.0.0.0:8085:8080
