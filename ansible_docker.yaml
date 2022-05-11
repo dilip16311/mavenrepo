@@ -1,6 +1,7 @@
 ---
 - hosts: dev
   become: true
+  gather_facts: no
   tasks:
     - name: install docker
       yum:
